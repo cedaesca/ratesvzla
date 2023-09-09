@@ -41,23 +41,28 @@ export class ScrapperService {
   public async getMultipleTextContents(
     options: GetMultipleTextContentsOptions,
   ): Promise<object> {
-    await this.goTo(options.url);
-    const resultsObject = {};
-    for (const [selectorKey, selector] of Object.entries(options.selectors)) {
-      try {
-        const element = await this.configuratedPage.waitForSelector(selector);
-        resultsObject[selectorKey] = await element.evaluate(
-          (el) => el.textContent,
-        );
-      } catch (error) {
-        throw new Error(
-          `Failed to fetch content using selector "${selectorKey}" from ${options.url}. Error: ${error.message}`,
-        );
-      } finally {
-        await this.cleanup();
+    try {
+      await this.goTo(options.url);
+      const resultsObject = {};
+
+      for (const [selectorKey, selector] of Object.entries(options.selectors)) {
+        try {
+          const element = await this.configuratedPage.waitForSelector(selector);
+
+          resultsObject[selectorKey] = await element.evaluate(
+            (el) => el.textContent,
+          );
+        } catch (error) {
+          throw new Error(
+            `Failed to fetch content using selector "${selectorKey}" from ${options.url}. Error: ${error.message}`,
+          );
+        }
       }
+
+      return resultsObject;
+    } finally {
+      await this.cleanup();
     }
-    return resultsObject;
   }
 
   private async goTo(url: string): Promise<void> {
