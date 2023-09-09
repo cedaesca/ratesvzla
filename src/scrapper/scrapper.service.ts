@@ -55,11 +55,12 @@ export class ScrapperService {
     return resultsObject;
   }
 
-  private async goTo(url: string): Promise<Page> {
-    await this.init();
-    await this.configuratedPage.goto(url);
+  private async goTo(url: string): Promise<void> {
+    if (!this.browser) {
+      await this.init();
+    }
 
-    return this.configuratedPage;
+    await this.configuratedPage.goto(url);
   }
 
   private async init(): Promise<void> {
