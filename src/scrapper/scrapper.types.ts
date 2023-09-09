@@ -5,11 +5,13 @@ export interface GetTextContentOptions {
 
 export interface GetMultipleTextContentsOptions {
   url: string;
-  selectors: {
-    [key: string]: string;
-  };
+  selectors: ScrapperSelector;
 }
 
 export interface MultipleTextContentsResult {
+  [key: string]: string;
+}
+
+export interface ScrapperSelector {
   [key: string]: string;
 }
