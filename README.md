@@ -1,6 +1,7 @@
 # 🌐 Rates Vzla - Venezuelan Exchange Rate API
 
 ![GitHub stars](https://img.shields.io/github/stars/cedaesca/ratesvzla?style=social) ![GitHub forks](https://img.shields.io/github/forks/cedaesca/ratesvzla?style=social) ![GitHub issues](https://img.shields.io/github/issues/cedaesca/ratesvzla) ![GitHub last commit](https://img.shields.io/github/last-commit/cedaesca/ratesvzla)
+[![Tests](https://github.com/cedaesca/ratesvzla/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/cedaesca/ratesvzla/actions/workflows/ci-tests.yml)
 
 A RESTful API that provides up-to-date Venezuelan exchange rates. Curated with Nest.js, "Rates Vzla" sources its rates from the [Venezuelan Central Bank](https://www.bcv.org.ve/) and the widely-followed [@monitordolarvzla](https://twitter.com/monitordolarvla) on Twitter.
 
