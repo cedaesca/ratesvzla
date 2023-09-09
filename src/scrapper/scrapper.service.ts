@@ -19,17 +19,23 @@ export class ScrapperService {
   private configuratedPage: Page;
 
   public async getTextContent(options: GetTextContentOptions): Promise<string> {
-    await this.goTo(options.url);
+    try {
+      await this.goTo(options.url);
 
-    const element = await this.configuratedPage.waitForSelector(
-      options.selector,
-    );
+      const element = await this.configuratedPage.waitForSelector(
+        options.selector,
+      );
 
-    const value = await element.evaluate((el) => el.textContent);
+      const value = await element.evaluate((el) => el.textContent);
 
-    this.browser.close();
-
-    return value;
+      return value;
+    } catch (error) {
+      throw new Error(
+        `Failed to fetch text content from ${options.url} using selector ${options.selector}: ${error.message}`,
+      );
+    } finally {
+      await this.cleanup();
+    }
   }
 
   public async getMultipleTextContents(
@@ -61,6 +67,20 @@ export class ScrapperService {
     }
 
     await this.configuratedPage.goto(url);
+  }
+
+  private async cleanup(): Promise<void> {
+    if (this.configuratedPage) {
+      await this.configuratedPage.close();
+
+      this.configuratedPage = null;
+    }
+
+    if (this.browser) {
+      await this.browser.close();
+
+      this.browser = null;
+    }
   }
 
   private async init(): Promise<void> {
