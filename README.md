@@ -19,12 +19,12 @@ A RESTful API that provides up-to-date Venezuelan exchange rates. Curated with N
 
 ### Installation
 
-\```bash
+```bash
 git clone https://github.com/cedaesca/ratesvzla.git
 cd ratesvzla
 npm install
 npm start
-\```
+```
 
 ## ⛏️ Built Using
 
