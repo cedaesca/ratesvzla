@@ -3,6 +3,7 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import {
   GetMultipleTextContentsOptions,
   GetTextContentOptions,
+  MultipleTextContentsResult,
 } from './scrapper.types';
 
 @Injectable()
@@ -40,7 +41,7 @@ export class ScrapperService {
 
   public async getMultipleTextContents(
     options: GetMultipleTextContentsOptions,
-  ): Promise<object> {
+  ): Promise<MultipleTextContentsResult> {
     try {
       await this.goTo(options.url);
       const resultsObject = {};

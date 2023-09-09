@@ -9,3 +9,7 @@ export interface GetMultipleTextContentsOptions {
     [key: string]: string;
   };
 }
+
+export interface MultipleTextContentsResult {
+  [key: string]: string;
+}
