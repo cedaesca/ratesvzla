@@ -63,17 +63,9 @@ export class ScrapperService {
   }
 
   private async init(): Promise<void> {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    page.setDefaultNavigationTimeout(this.pageTimeout);
-
-    await page.setViewport({
-      width: this.viewportResolution.width,
-      height: this.viewportResolution.height,
-    });
-
-    this.browser = browser;
-    this.configuratedPage = page;
+    this.browser = await puppeteer.launch();
+    this.configuratedPage = await this.browser.newPage();
+    this.configuratedPage.setDefaultNavigationTimeout(this.pageTimeout);
+    await this.configuratedPage.setViewport(this.viewportResolution);
   }
 }
